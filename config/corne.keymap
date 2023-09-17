@@ -13,43 +13,61 @@
                 compatible = "zmk,keymap";
 
 // Translation table (US to SE):
-//   ;   ->  ö
-//   '   ->  ä
-//   /   ->  -
+//  ;  (SEMI)   ->  ö
+//  '  (SQT)    ->  ä
+//  /  (FSLH)   ->  -
+//  @  (AT)     ->  "
+//  $  (DLLR)   ->  ¤
+//  ^  (CARET)  ->  &
+//  &  (AMPS)   ->  /
+//  (  (LPAR)   ->  )
+//  )  (RPAR)   ->  =
+//  \  (BSLH)   ->   '
+//  -  (MINUS)  ->  +
+//  =  (EQUAL)  ->  ´
+//  `  (GRAVE)  ->  §
+//  [  (LBKT)   ->  å
+//  ]  (RBKT)   ->  ¨
+//  |  (PIPE)   ->  *
+//  _  (UNDER)  ->  ?
+//  +  (PLUS)   ->  `
+//  ~  (TILDE)  ->  ½
+//  {  (LBRC)   ->  Å
+//  }  (LBRC)   ->  ^
 
                 default_layer {
 // -----------------------------------------------------------------------------------------
-// | TAB  |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | ESC  |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ALT  |
+// | TAB  |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  |  Å   |
+// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  Ö  |  Ä   |
+// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  | ALT | ESC  |
 //                    | GUI | LWR | ENT |   | SPC | BKSP | RSE |
                         label = "Base";
                         bindings = <
-   &kp TAB   &kp Q &kp W &kp E    &kp R &kp T      &kp Y     &kp U    &kp I     &kp O   &kp P    &kp ESC
+   &kp TAB   &kp Q &kp W &kp E    &kp R &kp T      &kp Y     &kp U    &kp I     &kp O   &kp P    &kp LBKT
    &kp LCTRL &kp A &kp S &kp D    &kp F &kp G      &kp H     &kp J    &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LSHFT &kp Z &kp X &kp C    &kp V &kp B      &kp N     &kp M    &kp COMMA &kp DOT &kp FSLH &kp RALT
+   &kp LSHFT &kp Z &kp X &kp C    &kp V &kp B      &kp N     &kp M    &kp COMMA &kp DOT &kp RALT &kp ESC
                          &kp LGUI &mo 1 &kp RET    &kp SPACE &kp BSPC &mo 2
                         >;
                 };
                 lower_layer {
 // -----------------------------------------------------------------------------------------
-// |      |  !  |  @  |  #  |  $  |   %  |   |  ^  |  &  |  *  |  (  |  )  |   \   |
+// |   @  |  !  |  "  |  #  |  $  |   %  |   |  ^  |  &  |  *  |  (  |  )  |   \   |
 // |      |  1  |  2  |  3  |  4  |   5  |   |  -  |  =  |  `  |  [  |  ]  |  "|"  |
-// |      |  6  |  7  |  8  |  9  |   0  |   |  _  |  +  |  ~  |  {  |  }  |       |
-//                    |     |     |      |   |     |     |     |
+// |      |  6  |  7  |  8  |  9  |   0  |   |  <  |  +  |  ~  |  {  |  }  |   /   |
+//                    |     |     |      |   |     | DEL | SHFT|
                         label = "Lower";
                         bindings = <
-   &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET  &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp BSLH
-   &trans &kp N1   &kp N2 &kp N3   &kp N4   &kp N5      &kp MINUS  &kp EQUAL &kp GRAVE       &kp LBKT &kp RBKT &kp PIPE
-   &trans &kp N6   &kp N7 &kp N8   &kp N9   &kp N0      &kp UNDER  &kp PLUS  &kp TILDE       &kp LBRC &kp RBRC &trans
-                          &trans   &trans   &trans      &trans     &trans    &trans
+   &kp RA(N2) &kp EXCL &kp AT &kp HASH &kp RA(N4) &kp PRCNT   &kp LBRC   &kp CARET &kp PIPE     &kp LS(N8) &kp LS(N9) &kp RA(PLUS)
+   &trans     &kp N1   &kp N2 &kp N3   &kp N4     &kp N5      &kp FSLH   &kp RPAR  &kp PLUS     &kp RA(N8) &kp RA(N9) &kp RA(LT)
+   &trans     &kp N6   &kp N7 &kp N8   &kp N9     &kp N0      &kp LT     &kp MINUS &kp LS(RBKT) &kp RA(N7) &kp RA(N0) &kp LS(N7)
+                              &trans   &trans     &trans      &trans     &kp DEL   &kp LSHFT
                         >;
                 };
 
                 raise_layer {
 // -----------------------------------------------------------------------------------------
 // |       |  F1  |  F2  |  F3   |  F4   |  F5        |   |  F6  | F7  | F8  | F9  | F10 |     |
-// |       | Prev | Next | Vol - | Vol + | Play/Pause |   |      | LFT | DWN | UP  | RGT |     |
+// |       | Prev | Next | Vol - | Vol + | Play/Pause |   | LEFT | DWN | UP  | RGT |     |     |
 // | BTCLR | BT1  | BT2  | BT3   | BT4   | BT5        |   |      |     |     |     |     |     |
 //                       |       |       |            |   |      |     |     |
                         label = "Raise";
